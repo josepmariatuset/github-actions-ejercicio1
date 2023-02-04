@@ -32,5 +32,6 @@ jobs:
       - name: test 
         working-directory: ./hangman-front 
         run: | 
+          npm ci 
           npm test
 
