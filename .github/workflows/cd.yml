@@ -44,7 +44,9 @@ jobs:
           echo "${{ secrets.GIT_DOCKER_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
           image=ghcr.io/$DOCKER_USER/$DOCKER_REPOSITORY
           image=$(echo $image | tr '[A-Z]' '[a-z]')
-          version=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          version=$(echo ${{ github.ref }})
+          version=$(date +%s)
+          version=$(echo version | sed -e 's,.*/\(.*\),\1,')
 
           docker build . --file Dockerfile.workflow --tag $image:$version 
           docker images
