@@ -4,20 +4,8 @@ on:
   workflow_dispatch:
     
 jobs:
-  pre:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: login docker 
-        env:
-          DOCKER_USER: "jmtuset"
-          DOCKER_REPOSITORY: "hangman-front"
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-
   build: 
     runs-on: ubuntu-latest 
-    needs: pre 
 
     steps:
       - uses: actions/checkout@v3 
@@ -53,8 +41,11 @@ jobs:
           DOCKER_USER: "josepmariatuset"
           DOCKER_REPOSITORY: "hangman-front"
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-          image=ghcr.io/$DOCKER_USER/$DOCKER_REPOSITORY:$(date +%s)
-          docker build . --file Dockerfile.workflow --tag $image 
+          echo "${{ secrets.GIT_DOCKER_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          image=ghcr.io/$DOCKER_USER/$DOCKER_REPOSITORY
+          image=$(echo $image | tr '[A-Z]' '[a-z]')
+          version=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          docker build . --file Dockerfile.workflow --tag $image:$version 
           docker images
-          docker push $image
+          docker push $image:$version 
