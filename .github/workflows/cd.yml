@@ -41,7 +41,7 @@ jobs:
           DOCKER_REPOSITORY: "hangman-front"
 #          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          echo "${{ secrets.GITHUBTOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
           image=$DOCKER_USER/$DOCKER_REPOSITORY:$(date +%s)
           docker build . --file Dockerfile.workflow --tag $image 
 
