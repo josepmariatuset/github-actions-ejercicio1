@@ -46,7 +46,7 @@ jobs:
           image=$(echo $image | tr '[A-Z]' '[a-z]')
           version=$(echo ${{ github.ref }})
           version=$(date +%s)
-          version=$(echo version | sed -e 's,.*/\(.*\),\1,')
+          version=$(echo $version | sed -e 's,.*/\(.*\),\1,')
 
           docker build . --file Dockerfile.workflow --tag $image:$version 
           docker images
