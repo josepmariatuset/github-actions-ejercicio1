@@ -44,5 +44,4 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
           image=$DOCKER_USER/$DOCKER_REPOSITORY:$(date +%s)
           docker build . --file Dockerfile.workflow --tag $image 
-
-# docker push $image
+          docker push $image
