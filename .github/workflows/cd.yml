@@ -40,9 +40,9 @@ jobs:
           DOCKER_USER: "jmtuset"
           DOCKER_REPOSITORY: "hangman-front"
 #          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-#        run: |
-#          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USER --password-stdin
         run: |
+          echo "${{ secrets.GITHUBTOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
           image=$DOCKER_USER/$DOCKER_REPOSITORY:$(date +%s)
           docker build . --file Dockerfile.workflow --tag $image 
+
 # docker push $image
