@@ -31,13 +31,12 @@ jobs:
         ports:
           - 5432:5432
       hangman-api: 
-        image: jaimesalas/hangman-api
+        image: jaimesalas/hangman-api:latest
         ports:
           - 3001:3000
 
       hangman-front: 
-        image: jaimesalas/hangman-front
-        #image: ghcr.io/josepmariatuset/hangman-front
+        image: ghcr.io/josepmariatuset/hangman-front:latest
         env:
           API_URL: http://localhost:3001
         ports:
