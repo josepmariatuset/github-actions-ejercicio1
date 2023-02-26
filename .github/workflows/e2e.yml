@@ -66,3 +66,13 @@ jobs:
         with:
           working-directory: ./hangman-e2e/e2e
           start: npm run open
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
