@@ -63,5 +63,5 @@ jobs:
           npx knex migrate:latest --env development
 
       - name: Test E2E 
-        working-directory: ./hangman-e2e 
+        working-directory: ./hangman-e2e/e2e
         run: npm run open
