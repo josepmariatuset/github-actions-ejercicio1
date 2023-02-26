@@ -45,7 +45,7 @@ jobs:
           image=ghcr.io/$DOCKER_USER/$DOCKER_REPOSITORY
           image=$(echo $image | tr '[A-Z]' '[a-z]')
           version=$(echo ${{ github.ref }})
-          version=build-${CI_PIPELINE_IID}
+          version=build-${CI_PIPELINE_ID}
           version=$(echo $version | sed -e 's,.*/\(.*\),\1,')
 
           docker build . --file Dockerfile.workflow --tag $image:$version 
