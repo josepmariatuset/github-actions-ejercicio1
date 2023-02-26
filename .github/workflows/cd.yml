@@ -12,8 +12,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16 
-          cache: 'npm'
-          cache-dependency-path: hangman-front/package-lock.json 
       - name: build 
         working-directory: ./hangman-front
         run: |
