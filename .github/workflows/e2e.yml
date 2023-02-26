@@ -13,7 +13,7 @@ on:
     paths: ['hangman-api/**']
 
 jobs:
-  test-e2e:
+  pretest-e2e:
     runs-on: ubuntu-latest
 
     services:
@@ -62,6 +62,9 @@ jobs:
           npm ci 
           npx knex migrate:latest --env development
 
-      - name: Test E2E 
-        working-directory: ./hangman-e2e/e2e
-        run: npm run open
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: ./hangman-e2e/e2e
+          build: npm run build
+          start: npm start
