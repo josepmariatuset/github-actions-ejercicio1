@@ -61,7 +61,7 @@ jobs:
         run: |
           npm ci 
           npx knex migrate:latest --env development
-      - name: Wait for approval
-        uses: trstringer/manual-approval@v1
-        with:
-          minimum-approvals: 1
+
+      - name: Test E2E 
+        working-directory: ./hangman-e2e 
+        run: npm run open
