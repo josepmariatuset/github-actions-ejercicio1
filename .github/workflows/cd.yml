@@ -47,5 +47,6 @@ jobs:
           version=$(echo $(date +%s) | sed -e 's,.*/\(.*\),\1,')
 
           docker build . --file Dockerfile.workflow --tag $image:$version 
-          docker images
+          docker tag $image:$version $image:latest
           docker push $image:$version 
+          docker push $image:latest 
